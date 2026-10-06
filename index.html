@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MediDesk - Clinic appointment management demo">
+  <title>MediDesk | Clinic Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" data-view="dashboard" aria-label="MediDesk home">
+      <span class="brand-mark">✚</span>
+      <span>MediDesk</span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+      <button class="nav-btn" data-view="appointments">Appointments</button>
+      <button class="nav-btn doctor-only" data-view="patients">Patients</button>
+    </nav>
+    <div class="header-actions">
+      <span id="roleBadge" class="role-badge">Patient Demo</span>
+      <button id="logoutBtn" class="btn btn-outline btn-small">Switch Role</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="dashboardView" class="view active">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">WELCOME TO MEDIDESK</p>
+          <h1>Simple, calm, <span>care management.</span></h1>
+          <p class="hero-copy">Book appointments, keep track of your visits, and give authorized doctors a clear view of their schedule and relevant synthetic patient information.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-view="appointments">Manage Appointments</button>
+            <button class="btn btn-ghost doctor-only" data-view="patients">View Patients</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="sun"></div>
+          <div class="wave wave-one"></div>
+          <div class="wave wave-two"></div>
+          <div class="hero-card-content">
+            <span class="status-dot"></span>
+            <strong>Clinic is open</strong>
+            <small>Demo environment · Synthetic data</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <span class="stat-icon">📅</span>
+          <div><strong id="statAppointments">0</strong><span>Upcoming appointments</span></div>
+        </article>
+        <article class="stat-card">
+          <span class="stat-icon">✓</span>
+          <div><strong id="statCompleted">0</strong><span>Completed visits</span></div>
+        </article>
+        <article class="stat-card doctor-only">
+          <span class="stat-icon">👥</span>
+          <div><strong id="statPatients">0</strong><span>Demo patients</span></div>
+        </article>
+      </div>
+
+      <div class="content-grid">
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">NEXT VISIT</p>
+              <h2>Upcoming appointment</h2>
+            </div>
+            <button class="text-btn" data-view="appointments">View all →</button>
+          </div>
+          <div id="nextAppointment"></div>
+        </section>
+
+        <section class="panel tips">
+          <p class="eyebrow">QUICK NOTE</p>
+          <h2>Designed for a smooth clinic day.</h2>
+          <p>All records shown here are fictional demo records. No real patient information is stored or requested.</p>
+        </section>
+      </div>
+    </section>
+
+    <section id="appointmentsView" class="view">
+      <div class="page-title">
+        <div>
+          <p class="eyebrow">SCHEDULE</p>
+          <h1>Appointments</h1>
+          <p>Book and manage your clinic visits.</p>
+        </div>
+        <button id="openBookingBtn" class="btn btn-primary patient-only">+ Book appointment</button>
+      </div>
+
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+        <button class="filter-btn" data-filter="cancelled">Cancelled</button>
+      </div>
+      <div id="appointmentsList" class="appointment-list"></div>
+    </section>
+
+    <section id="patientsView" class="view doctor-only">
+      <div class="page-title">
+        <div>
+          <p class="eyebrow">AUTHORIZED DOCTOR VIEW</p>
+          <h1>Patient information</h1>
+          <p>Relevant synthetic data for appointment management only.</p>
+        </div>
+      </div>
+      <div id="patientsGrid" class="patients-grid"></div>
+    </section>
+  </main>
+
+  <div id="modalBackdrop" class="modal-backdrop hidden" role="presentation">
+    <div id="bookingModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+      <button class="modal-close" id="closeModalBtn" aria-label="Close">×</button>
+      <p class="eyebrow">NEW APPOINTMENT</p>
+      <h2 id="bookingTitle">Book a visit</h2>
+      <form id="bookingForm">
+        <label>Doctor
+          <select id="doctorSelect" required></select>
+        </label>
+        <label>Date
+          <input id="dateInput" type="date" required>
+        </label>
+        <label>Time
+          <select id="timeSelect" required>
+            <option value="">Choose a time</option>
+            <option>09:00 AM</option><option>10:00 AM</option><option>11:00 AM</option>
+            <option>02:00 PM</option><option>03:00 PM</option><option>04:00 PM</option>
+          </select>
+        </label>
+        <label>Reason for visit
+          <textarea id="reasonInput" rows="3" maxlength="160" placeholder="e.g. Routine consultation" required></textarea>
+        </label>
+        <button class="btn btn-primary btn-full" type="submit">Confirm appointment</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <footer>
+    <span>© 2026 MediDesk</span>
+    <span>Demo only · Synthetic patient data</span>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
